@@ -1,0 +1,5 @@
+# Ignore all files in apkg directory
+apkg/*
+
+# Ignore all files in Created_Files directory
+Created_Files/*
