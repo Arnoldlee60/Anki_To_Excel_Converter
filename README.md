@@ -1,25 +1,27 @@
-# Anki_To_Excel_Converter
+# Project Instructions
 
-This project processes Anki `.apkg` files and exports the card data to Excel files.
+## Setup
 
-## Installation
+1. **Clone the repository**  
+   Download or clone this repository to your local machine.
 
-1. Download the repository:
+2. **Install dependencies**  
+   After downloading the code, install the required Python packages by running:
+
+   ```bash
+   pip install pandas openpyxl
+   ```
+
+**How to Use**  
+Drop .apkg files
+Place your Anki .apkg files in the apkg folder.
+
+**Run the script**
+Once the .apkg files are in the apkg folder, simply run the script:
+
     ```bash
-    https://github.com/Arnoldlee60/Anki_To_Excel_Converter
+    python <main>.py
     ```
 
-2. Install the package:
-    ```bash
-    pip install pandas openpyxl
-    ```
-
-3. Run the code:
-    ```bash
-    Anki_To_Excel_Converter
-    ```
-
-## Requirements
-- Python 3.x
-- pandas
-- openpyxl
+**Generated Excel Files**
+The script will process the .apkg files, and the resulting Excel files will be saved in the Created_Files folder.
