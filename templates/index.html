@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APKG to Excel Converter</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>APKG to Excel Converter</h1>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <div class="file-upload">
+            <label for="file">Drag and drop your .apkg file or click to upload</label>
+            <input type="file" id="file" name="file" accept=".apkg">
+        </div>
+        <button type="submit">Convert to Excel</button>
+    </form>
+</body>
+</html>
