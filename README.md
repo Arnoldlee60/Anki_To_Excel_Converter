@@ -19,9 +19,7 @@ Place your Anki .apkg files in the apkg folder.
 **Run the script**
 Once the .apkg files are in the apkg folder, simply run the script:
 
-    ```bash
-    python <main>.py
-    ```
+    python main.py
 
 **Generated Excel Files**
 The script will process the .apkg files, and the resulting Excel files will be saved in the Created_Files folder.
