@@ -1,3 +1,5 @@
 # Ignore Excel files
 *.xlsx
 *.xls
+build/
+dist/

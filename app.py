@@ -58,8 +58,15 @@ def upload_file():
         filename = secure_filename(file.filename)
         file_path = os.path.join(UPLOAD_FOLDER, filename)
         file.save(file_path)
-        excel_file = process_apkg(file_path)
-        return send_file(excel_file, as_attachment=True)
+        
+        # Process the .apkg file and return the path of the generated Excel file
+        excel_file_path = process_apkg(file_path)
+        
+        # Send the Excel file to the client
+        return send_file(excel_file_path, as_attachment=True)
+
+import os
+from flask import current_app
 
 def process_apkg(apkg_file_path):
     with zipfile.ZipFile(apkg_file_path, 'r') as zip_ref:
@@ -98,14 +105,25 @@ def process_apkg(apkg_file_path):
         })
 
     df = pd.DataFrame(data)
+
+    # Use current app root path or working directory
     base_name = os.path.splitext(os.path.basename(apkg_file_path))[0]
     current_date = datetime.now().strftime("%Y_%m_%d")
+
+    # Create the output directory inside the current app root path
+    output_folder = os.path.join(current_app.root_path, 'Created_Files')
+    if not os.path.exists(output_folder):
+        os.makedirs(output_folder)
+
+    # Save the file in the output directory
     excel_file_name = f"{base_name}_{current_date}.xlsx"
-    excel_file_path = os.path.join(OUTPUT_FOLDER, excel_file_name)
+    excel_file_path = os.path.join(output_folder, excel_file_name)
+
     df.to_excel(excel_file_path, index=False)
 
     conn.close()
 
+    # Cleanup extracted files
     if os.path.exists(extract_folder):
         for root, dirs, files in os.walk(extract_folder, topdown=False):
             for name in files:
@@ -114,7 +132,10 @@ def process_apkg(apkg_file_path):
                 os.rmdir(os.path.join(root, name))
         os.rmdir(extract_folder)
 
+    # Return the path to the Excel file
     return excel_file_path
 
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False, host='127.0.0.1', port=8000)
+
